@@ -2,3 +2,4 @@
 
 DOMAIN-SUFFIX,hostloc.com
 DOMAIN-SUFFIX,v2ex.com
+IP-CIDR,150.230.45.100/32
