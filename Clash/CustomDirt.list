@@ -1,8 +1,8 @@
 # CustomDirt
 
 DOMAIN-SUFFIX,aliyun.test
-DOMAIN-SUFFIX,waytohou.xyz
 DOMAIN-SUFFIX,alibaba-inc.com
+DOMAIN-SUFFIX,aliyun-inc.com
 
 IP-CIDR,67.230.160.237/32
 IP-CIDR,67.216.213.152/32
