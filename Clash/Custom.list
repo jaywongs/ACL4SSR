@@ -10,3 +10,8 @@ DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,cursorapi.com
 DOMAIN-SUFFIX,cursor-cdn.com
 DOMAIN-SUFFIX,download.todesktop.com
+
+# Lighter
+DOMAIN-SUFFIX,lighter.exchange
+DOMAIN-SUFFIX,lighter.xyz
+DOMAIN-SUFFIX,zklighter.elliot.ai
