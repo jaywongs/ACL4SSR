@@ -89,6 +89,12 @@ const PERSONAL_RULES = [
   "DOMAIN-SUFFIX,fun.xyz," + G.crypto,
   "DOMAIN-SUFFIX,privy.io," + G.crypto,
   "DOMAIN-SUFFIX,alchemy.com," + G.crypto,
+  "DOMAIN-SUFFIX,reth.rs," + G.crypto,
+  // Lighter 用的钱包登录（Dynamic）和地区合规检测（sunbreak），漏掉会被判成美国 IP
+  "DOMAIN-SUFFIX,dynamicauth.com," + G.crypto,
+  "DOMAIN-SUFFIX,dynamic-static-assets.com," + G.crypto,
+  "DOMAIN-SUFFIX,dynamic.xyz," + G.crypto,
+  "DOMAIN-SUFFIX,sunbreak.com," + G.crypto,
   "DOMAIN-SUFFIX,polymarket.com," + G.polymarket,
   "DOMAIN-SUFFIX,polymarketcdn.com," + G.polymarket,
   "DOMAIN-SUFFIX,mypikpak.com," + G.default,
