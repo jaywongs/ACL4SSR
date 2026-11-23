@@ -18,11 +18,13 @@ const HY2_BANDWIDTH = {
 };
 
 // 按 server 识别自建节点（比按节点名可靠，subconverter 改名也不受影响）。
-// 顺序即「自建优选」故障转移的优先级。
+// 顺序即「自建优选」故障转移的优先级；同一台机器的 Trojan（TCP）紧跟在它的 Hysteria2 后面，
+// 蜂窝网把 UDP 卡住时自动退到 TCP。gia 的 Trojan 证书是 waytohou.eu.org，订阅里 server 写成 gia.waytohou.xyz 以便识别。
 // slow：带宽只有约 50M，延迟却不高，放进地区测速组会被选中，所以只留在手动可选的组里。
+// notOwn：不进「自建优选」（不想默认经它出去），Crypto、地区组和手动选节点里仍然有。
 const OWN_SERVERS = [
-  { host: "kr2.waytohou.xyz", region: "KR" },
-  { host: "kr1.waytohou.xyz", region: "KR" },
+  { host: "kr2.waytohou.xyz", region: "KR", notOwn: true },
+  { host: "kr1.waytohou.xyz", region: "KR", notOwn: true },
   { host: "sjarm.waytohou.xyz", region: "US" },
   { host: "sg3.waytohou.xyz", region: "SG" },
   { host: "sj.waytohou.xyz", region: "US", slow: true },
@@ -205,7 +207,7 @@ function main(config, profileName) {
     {
       name: G.own,
       type: "fallback",
-      proxies: names(own),
+      proxies: names(own.filter((p) => !OWN_SERVERS[ownRank(p)].notOwn)),
       url: "https://www.gstatic.com/generate_204",
       interval: 300,
     },
