@@ -18,8 +18,8 @@ const HY2_BANDWIDTH = {
 };
 
 // 按 server 识别自建节点（比按节点名可靠，subconverter 改名也不受影响）。
-// 顺序即「自建优选」故障转移的优先级；同一台机器的 Trojan（TCP）紧跟在它的 Hysteria2 后面，
-// 蜂窝网把 UDP 卡住时自动退到 TCP。gia 的 Trojan 证书是 waytohou.eu.org，订阅里 server 写成 gia.waytohou.xyz 以便识别。
+// 顺序即「自建优选」故障转移的优先级；同一台机器的 VLESS Reality（TCP）紧跟在它的 Hysteria2 后面，
+// 蜂窝网把 UDP 卡住时自动退到 TCP。
 // slow：带宽只有约 50M，延迟却不高，放进地区测速组会被选中，所以只留在手动可选的组里。
 // notOwn：不进「自建优选」（不想默认经它出去），Crypto、地区组和手动选节点里仍然有。
 const OWN_SERVERS = [
@@ -164,13 +164,16 @@ function main(config, profileName) {
       p.up = `${bw.up} Mbps`;
       p.down = `${bw.down} Mbps`;
     }
+    // Xray 26.9.8 起 REALITY 服务端要求 ClientHello 带 X25519MLKEM768 密钥，mihomo 默认不带，不开就认证失败。
+    // sg3 的 subconverter 已打补丁输出这一项，这里再兜底一次（以后升级 subconverter 丢了补丁也不受影响）。
+    if (p["reality-opts"]) p["reality-opts"]["support-x25519mlkem768"] = true;
   }
 
-  // 自建节点按 OWN_SERVERS 顺序排，同一台机器的 Trojan 排在 Hysteria2 后面
+  // 自建节点按 OWN_SERVERS 顺序排，同一台机器的 TCP 节点（Reality）排在 Hysteria2 后面
   const ownRank = (p) => OWN_SERVERS.findIndex((s) => s.host === p.server);
   const own = proxies
     .filter((p) => ownRank(p) >= 0)
-    .sort((a, b) => ownRank(a) - ownRank(b) || (a.type === "trojan") - (b.type === "trojan"));
+    .sort((a, b) => ownRank(a) - ownRank(b) || (a.type !== "hysteria2") - (b.type !== "hysteria2"));
   const airport = proxies.filter((p) => ownRank(p) < 0);
   const names = (list) => list.map((p) => p.name);
 
