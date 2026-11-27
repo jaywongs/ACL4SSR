@@ -25,10 +25,10 @@ const HY2_BANDWIDTH = {
 const OWN_SERVERS = [
   { host: "kr2.waytohou.xyz", region: "KR", notOwn: true },
   { host: "kr1.waytohou.xyz", region: "KR", notOwn: true },
-  { host: "sjarm.waytohou.xyz", region: "US" },
-  { host: "sg3.waytohou.xyz", region: "SG" },
-  { host: "sj.waytohou.xyz", region: "US", slow: true },
   { host: "gia.waytohou.xyz", region: "US", slow: true },
+  { host: "sjarm.waytohou.xyz", region: "US" },
+  { host: "sj.waytohou.xyz", region: "US", slow: true },
+  { host: "sg3.waytohou.xyz", region: "SG" },
 ];
 
 // 机场节点按名字分地区
